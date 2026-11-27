@@ -1,0 +1,48 @@
+{
+  "accepted": {
+    "message": "a-801",
+    "source": "sensor-R17",
+    "generation": 6,
+    "tenant": "red",
+    "topic": "L-30/alerts",
+    "groups": [
+      "maint",
+      "quality"
+    ],
+    "handoff": "group",
+    "at": 12,
+    "text": "测量重复性待复核"
+  },
+  "private": {
+    "message": "a-802",
+    "source": "sensor-R17",
+    "generation": 6,
+    "tenant": "red",
+    "topic": "L-30/alerts",
+    "groups": [
+      "maint"
+    ],
+    "receiver": "ops-11",
+    "handoff": "instance-private",
+    "at": 17,
+    "text": "现场设备记录仅供当班使用"
+  },
+  "latest-red": {
+    "message": "s-15",
+    "source": "sensor-R17",
+    "generation": 6,
+    "tenant": "red",
+    "topic": "L-30/latest",
+    "at": 15,
+    "text": "调焦完成"
+  },
+  "latest-blue": {
+    "message": "s-22",
+    "source": "sensor-B11",
+    "generation": 7,
+    "tenant": "blue",
+    "topic": "L-30/latest",
+    "at": 30,
+    "text": "等待校准"
+  }
+}

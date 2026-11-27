@@ -1,0 +1,52 @@
+{
+  "first": {
+    "group": "maint",
+    "instance": "ops-11",
+    "tenant": "red",
+    "production_line": "L-30",
+    "range": [
+      0,
+      26
+    ],
+    "topics": [
+      "alerts",
+      "latest"
+    ],
+    "handoff": true
+  },
+  "second": {
+    "group": "maint",
+    "instance": "ops-22",
+    "tenant": "red",
+    "production_line": "L-30",
+    "range": [
+      25,
+      60
+    ],
+    "topics": [
+      "alerts",
+      "latest"
+    ],
+    "handoff": true
+  },
+  "audit": {
+    "group": "quality",
+    "instance": "qual-91",
+    "tenant": "red",
+    "production_line": "L-30",
+    "range": [
+      0,
+      60
+    ],
+    "topics": [
+      "alerts"
+    ],
+    "handoff": false
+  },
+  "maint-settings": {
+    "group": "maint",
+    "pending_handoff": "group-only",
+    "unconfirmed_instance_private": "verify-original",
+    "qos": 1
+  }
+}

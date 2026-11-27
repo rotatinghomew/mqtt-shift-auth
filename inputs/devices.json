@@ -1,0 +1,42 @@
+{
+  "sensor-old": {
+    "client_name": "lens-5",
+    "tenant": "red",
+    "production_line": "L-30",
+    "instance": "sensor-R17",
+    "generation": 6,
+    "certificate_verified": true
+  },
+  "sensor-new": {
+    "client_name": "lens-5",
+    "tenant": "blue",
+    "production_line": "L-30",
+    "instance": "sensor-B11",
+    "generation": 7,
+    "certificate_verified": true
+  },
+  "watch-old": {
+    "client_name": "watch-1",
+    "tenant": "red",
+    "production_line": "L-30",
+    "instance": "ops-11",
+    "generation": 1,
+    "certificate_verified": true
+  },
+  "watch-next": {
+    "client_name": "watch-1",
+    "tenant": "red",
+    "production_line": "L-30",
+    "instance": "ops-22",
+    "generation": 2,
+    "certificate_verified": true
+  },
+  "watch-neighbor": {
+    "client_name": "watch-1",
+    "tenant": "blue",
+    "production_line": "L-30",
+    "instance": "ops-46",
+    "generation": 1,
+    "certificate_verified": true
+  }
+}

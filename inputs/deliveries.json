@@ -1,0 +1,52 @@
+{
+  "maint-send": {
+    "message": "a-801",
+    "attempt": "try-1",
+    "group": "maint",
+    "instance": "ops-11",
+    "connection": "c-4",
+    "packet_id": 12,
+    "observation": "sent_unknown",
+    "at": 24
+  },
+  "qual-ack": {
+    "message": "a-801",
+    "attempt": "try-2",
+    "group": "quality",
+    "instance": "qual-91",
+    "connection": "c-7",
+    "packet_id": 12,
+    "observation": "ack",
+    "at": 24
+  },
+  "maint-ack": {
+    "message": "a-801",
+    "attempt": "try-1",
+    "group": "maint",
+    "instance": "ops-11",
+    "connection": "c-4",
+    "packet_id": 12,
+    "observation": "ack",
+    "at": 38
+  },
+  "next-send": {
+    "message": "a-801",
+    "attempt": "try-3",
+    "group": "maint",
+    "instance": "ops-22",
+    "connection": "c-9",
+    "packet_id": 12,
+    "observation": "sent_unknown",
+    "at": 31
+  },
+  "next-ack": {
+    "message": "a-801",
+    "attempt": "try-3",
+    "group": "maint",
+    "instance": "ops-22",
+    "connection": "c-9",
+    "packet_id": 12,
+    "observation": "ack",
+    "at": 41
+  }
+}
