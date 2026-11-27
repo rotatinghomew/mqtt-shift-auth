@@ -32,3 +32,34 @@ python3 -m unittest discover -s tests -v
 ## 报文样本
 
 使用 `python3 mqtt_samples.py` 查看持久会话 CONNECT、订阅、QoS 1 发布及接收确认的报文样本。连接的已验证证书持有及设备归属由 `devices.json` 提供。
+
+## 本地消息入口
+
+`message_gateway.py` 在上述已核验事实之上实现本地消息入口，不依赖外部 MQTT 设施；`mqtt_codec.py` 负责与 `mqtt_samples.py` 互通的 MQTT 3.1.1 报文解析与构造。
+
+### 身份与值班目录
+
+- 连接只接受 `certificate_verified` 为真的已登记设备；自报的 `client_name` 与登记不符直接拒绝（CONNACK 标识符拒绝）。实例（instance）与部署代次（generation）才是身份本身，client_name 不是认领凭证。
+- 值班目录按实例分配订阅组、数据类别（alerts/latest）与班次范围；同一连接可以分别获准公共设备状态与内部告警两类订阅，越权订阅在 SUBACK 中返回 0x80。
+- 换租户或重新分配的设备名不能认领旧队列：租户/产线不符记 `tenant-mismatch`，新代次没有值班登记记 `device-generation`，均隔离处理。
+
+### 接续与接班
+
+- 同一实例以持久会话重连时只做续传：未确认的 QoS 1 PUBLISH 沿用原报文号并置 DUP，PUBACK 仍落在原办理引用（attempt）上。
+- 新连接携带旧 client_name 且实例不同时，按消息产生时的租户/产线归属、组的 `group-only` 交接范围和当前订阅者身份逐条核对：组告警可由同组下一班以新办理引用补投（新会话可再次分到相同报文号）；实例私有消息只能向原订阅者核对（`verify-original`），新成员无权领取。
+- 旧连接的迟到 PUBACK 在新办理引用分配后被拒绝，不能抹掉新队列；一条告警在两个组的领取与确认互相独立。
+- 订阅撤回与中断相遇时，已交付的收件记录保留；组待办仍可交接，实例私有待办隔离。未确认内容分为 `safe-redeliver`、`verify-original`、`quarantine` 三类，见 `Gateway.unconfirmed()`。
+
+### 公共状态与诊断
+
+- latest 公共状态按租户与产线保留最后一条；读取人仍须具备范围相符的身份。设备交接给另一租户后，旧状态不成为新租户的当前状态。
+- `message_status(device, message)` 供设备运维查询消息此刻还在等哪个组、是否因接收资格或设备代次改变而停止交付；只有同租户同产线的管辖方，且只能看到自己所在组的领取状态。
+
+### 运行
+
+```bash
+python3 message_gateway.py            # 端到端字节演练
+python3 -m unittest discover -s tests -v
+```
+
+领域 API 与字节 API 的入口分别是 `Gateway.open_connection / subscribe / publish_device / acknowledge / handoff` 和 `Gateway.connect_from_packet / Connection.feed`。
