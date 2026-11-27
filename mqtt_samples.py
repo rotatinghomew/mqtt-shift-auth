@@ -27,8 +27,9 @@ def subscribe(packet_id, topic):
     return frame(0x82, struct.pack(">H", packet_id) + string(topic) + b"\x01")
 
 
-def publish(packet_id, topic, payload):
-    return frame(0x32, string(topic) + struct.pack(">H", packet_id) + payload.encode("utf-8"))
+def publish(packet_id, topic, payload, *, duplicate=False):
+    header = 0x3A if duplicate else 0x32
+    return frame(header, string(topic) + struct.pack(">H", packet_id) + payload.encode("utf-8"))
 
 
 def puback(packet_id):

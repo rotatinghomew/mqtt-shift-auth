@@ -16,6 +16,12 @@ class PacketTest(unittest.TestCase):
                          bytes.fromhex("3211000b4c2d33302f616c65727473000c6f6b"))
         self.assertEqual(puback(12), bytes.fromhex("4002000c"))
 
+    def test_persistent_session_retry_keeps_packet_identifier(self):
+        first = publish(12, "L-30/alerts", "ok")
+        retry = publish(12, "L-30/alerts", "ok", duplicate=True)
+        self.assertEqual(retry[0], 0x3A)
+        self.assertEqual(retry[1:], first[1:])
+
     def test_payload_uses_variable_remaining_length(self):
         packet = publish(19, "alerts", "A" * 160)
         self.assertEqual(packet[:3], bytes.fromhex("32aa01"))
