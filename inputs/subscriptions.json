@@ -48,5 +48,20 @@
     "pending_handoff": "group-only",
     "unconfirmed_instance_private": "verify-original",
     "qos": 1
+  },
+  "blue-watch": {
+    "group": "blue-maint",
+    "instance": "ops-46",
+    "tenant": "blue",
+    "production_line": "L-30",
+    "range": [
+      35,
+      60
+    ],
+    "topics": [
+      "alerts",
+      "latest"
+    ],
+    "handoff": false
   }
 }

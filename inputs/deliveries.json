@@ -48,5 +48,15 @@
     "packet_id": 12,
     "observation": "ack",
     "at": 41
+  },
+  "private-send": {
+    "message": "a-802",
+    "attempt": "try-4",
+    "group": "maint",
+    "instance": "ops-11",
+    "connection": "c-4",
+    "packet_id": 13,
+    "observation": "sent_unknown",
+    "at": 24
   }
 }

@@ -6,7 +6,7 @@
 
 `inputs/` 中每份 JSON 以该来源自己的记录编号为键。记录编号作用于对应来源，检测时可同时查询原始编号与业务引用。相关内容均为合成，回环只读来源用于本机开发。
 
-- `devices.json`。连线认证方给出证书持有事实。client_name 是客户端自报的会话名。实际实例以 instance 与 generation 判定，production_line 和 tenant 由资产方给出。
+- `devices.json`。连线认证方给出证书持有事实。client_name 是客户端自报的会话名。实际实例以 instance 与 generation 判定，production_line 和 tenant 由资产方给出。ownership-change 的 at 是归属实际交接时刻。
 - `subscriptions.json`。公共设备状态 latest 在其现行租户与产线内保留最后一条。值班组的成员可获得标为 group 的告警，instance-private 限最初分配的实例；跨班交接受组的配置约束。
 - `messages.json`。topic 属于本地演练的 MQTT 主题空间。消息同时给出发送实例、设备归属代次及有效的接收组。deliveries 的报文号只在连接内使用，重发会改变网络报文号，原消息号及原办理引用仍可核对。
 - `deliveries.json`。accepted 表示连接确收，sent_unknown 只表示发送后未确认。ack 按连接、订阅实例、组和办理引用解释。接收观察时间取虚拟时钟秒数。 group-only 允许接班时为组告警开启 QoS 1 的独立补投尝试。旧会话的回执只证明其自身观察到的结果。新办理引用已经分配后，接班号的状态以自己实际收到的回执为准。

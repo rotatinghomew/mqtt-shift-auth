@@ -38,5 +38,21 @@
     "instance": "ops-46",
     "generation": 1,
     "certificate_verified": true
+  },
+  "quality-receiver": {
+    "client_name": "quality-1",
+    "tenant": "red",
+    "production_line": "L-30",
+    "instance": "qual-91",
+    "generation": 1,
+    "certificate_verified": true
+  },
+  "ownership-change": {
+    "production_line": "L-30",
+    "from_tenant": "red",
+    "to_tenant": "blue",
+    "previous_instance": "sensor-R17",
+    "new_instance": "sensor-B11",
+    "at": 35
   }
 }
